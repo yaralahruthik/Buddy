@@ -5,7 +5,7 @@
     :value="mon"
     @input="$emit('update:mon', $event)"
     @clear="$emit('update:mon', '')"
-    label="Add Mon Class with time" 
+    label="Mon Class with time" 
     />
 </template>
 

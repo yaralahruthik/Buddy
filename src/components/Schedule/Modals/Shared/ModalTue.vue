@@ -5,7 +5,7 @@
     :value="tue"
     @input="$emit('update:tue', $event)"
     @clear="$emit('update:tue', '')"
-    label="Add Tue Class with time" 
+    label="Tue Class with time" 
     />
 </template>
 

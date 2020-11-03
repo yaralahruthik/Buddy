@@ -9,10 +9,16 @@
     <td class="text-center bg-brown-2">{{ schedule.sun }}</td>
     <td class="text-center bg-grey-5">
       <div class="q-gutter-sm">
-      <q-btn round dense color="green" icon="edit" />
-      <q-btn round dense color="red" icon="delete" @click="promptToDelete(id)"/>
+      <q-btn round dense color="green" icon="edit" @click.stop="showEditTask = true" />
+      <q-btn round dense color="red" icon="delete" @click.stop="promptToDelete(id)"/>
       </div>
     </td>
+    <q-dialog v-model="showEditTask">
+      <edit-schedule 
+        @close="showEditTask = false" 
+        :schedule="schedule"
+        :id="id"/>
+  </q-dialog>
   </tr>
 </template>
 
@@ -20,6 +26,11 @@
 import { mapActions } from 'vuex'
 
 export default {
+  data() {
+    return {
+      showEditTask: false
+    }
+  },
   props: ['schedule', 'id'],
   methods: {
     ...mapActions('schedule', ['deleteSchedule']),
@@ -33,6 +44,9 @@ export default {
         this.deleteSchedule(id)
       })
     }
+  },
+  components: {
+    'edit-schedule': require('components/Schedule/EditSchedule.vue').default
   }
 }
 </script>

@@ -5,7 +5,7 @@
     :value="wed"
     @input="$emit('update:wed', $event)"
     @clear="$emit('update:wed', '')"
-    label="Add Wed Class with time" 
+    label="Wed Class with time" 
     />
 </template>
 

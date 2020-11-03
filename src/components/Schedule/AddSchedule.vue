@@ -29,8 +29,6 @@
       </q-card-section>
 
       <modal-buttons/>
-
-      <pre>{{ scheduleToSubmit }}</pre>
     </q-form>
 
   </q-card>
@@ -64,15 +62,15 @@ export default {
       }
     },
     components: {
-      'modal-header': require('components/Modals/Shared/ModalHeader.vue').default,
-      'modal-mon': require('components/Modals/Shared/ModalMon.vue').default,
-      'modal-tue': require('components/Modals/Shared/ModalTue.vue').default,
-      'modal-wed': require('components/Modals/Shared/ModalWed.vue').default,
-      'modal-thu': require('components/Modals/Shared/ModalThu.vue').default,
-      'modal-fri': require('components/Modals/Shared/ModalFri.vue').default,
-      'modal-sat': require('components/Modals/Shared/ModalSat.vue').default,
-      'modal-sun': require('components/Modals/Shared/ModalSun.vue').default,
-      'modal-buttons': require('components/Modals/Shared/ModalButtons.vue').default
+      'modal-header': require('components/Schedule/Modals/Shared/ModalHeader.vue').default,
+      'modal-mon': require('components/Schedule/Modals/Shared/ModalMon.vue').default,
+      'modal-tue': require('components/Schedule/Modals/Shared/ModalTue.vue').default,
+      'modal-wed': require('components/Schedule/Modals/Shared/ModalWed.vue').default,
+      'modal-thu': require('components/Schedule/Modals/Shared/ModalThu.vue').default,
+      'modal-fri': require('components/Schedule/Modals/Shared/ModalFri.vue').default,
+      'modal-sat': require('components/Schedule/Modals/Shared/ModalSat.vue').default,
+      'modal-sun': require('components/Schedule/Modals/Shared/ModalSun.vue').default,
+      'modal-buttons': require('components/Schedule/Modals/Shared/ModalButtons.vue').default
     }
 }
 </script>

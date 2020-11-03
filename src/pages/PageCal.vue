@@ -1,5 +1,7 @@
 <template>
   <q-page padding>
+    <no-schedule v-if="!Object.keys(schedule).length" />
+
     <q-markup-table
       v-if="Object.keys(schedule).length">
       <thead>
@@ -45,7 +47,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      showAddSchedule: true
+      showAddSchedule: false
     }
   },
   computed: {
@@ -55,8 +57,9 @@ export default {
     }
   },
   components: {
-    'row' : require('components/row.vue').default,
-    'add-schedule' : require('components/Modals/AddSchedule.vue').default
+    'row' : require('components/Schedule/row.vue').default,
+    'add-schedule' : require('components/Schedule/AddSchedule.vue').default,
+    'no-schedule' : require('components/Schedule/NoSchedule.vue').default
   }
 }
 </script>

@@ -3,37 +3,40 @@ import Vue from 'vue'
 
 const state = {
   schedule: {
-    // ID1: {
-    //   mon: "MonC",
-    //   tue: "TueC",
-    //   wed: "WedC",
-    //   thu: "ThuC",
-    //   fri: "FriC",
-    //   sat: "SatC",
-    //   sun: "SunC"
-    // },
-    // ID2: {
-    //   mon: "MonC",
-    //   tue: "TueC",
-    //   wed: "WedC",
-    //   thu: "ThuC",
-    //   fri: "FriC",
-    //   sat: "SatC",
-    //   sun: "SunC"
-    // },
-    // ID3: {
-    //   mon: "MonC",
-    //   tue: "TueC",
-    //   wed: "WedC",
-    //   thu: "ThuC",
-    //   fri: "FriC",
-    //   sat: "SatC",
-    //   sun: "SunC"
-    // }
+    ID1: {
+      mon: "MonC",
+      tue: "TueC",
+      wed: "WedC",
+      thu: "ThuC",
+      fri: "FriC",
+      sat: "SatC",
+      sun: "SunC"
+    },
+    ID2: {
+      mon: "MonC",
+      tue: "TueC",
+      wed: "WedC",
+      thu: "ThuC",
+      fri: "FriC",
+      sat: "SatC",
+      sun: "SunC"
+    },
+    ID3: {
+      mon: "MonC",
+      tue: "TueC",
+      wed: "WedC",
+      thu: "ThuC",
+      fri: "FriC",
+      sat: "SatC",
+      sun: "SunC"
+    }
   }
 };
 
 const mutations = {
+  updateSchedule(state, payload) {
+    Object.assign(state.schedule[payload.id], payload.updates)
+  },
   deleteSchedule(state, id) {
     Vue.delete(state.schedule, id)
   },
@@ -43,6 +46,9 @@ const mutations = {
 }
 
 const actions = {
+  updateSchedule({ commit }, payload) {
+    commit('updateSchedule', payload)
+  },
   deleteSchedule({ commit }, id) {
     commit('deleteSchedule', id)
   },

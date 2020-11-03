@@ -5,7 +5,7 @@
     :value="sat"
     @input="$emit('update:sat', $event)"
     @clear="$emit('update:sat', '')"
-    label="Add Sat Class with time" 
+    label="Sat Class with time" 
     />
 </template>
 
