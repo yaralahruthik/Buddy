@@ -13,17 +13,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr 
+        <row 
           v-for="(c, key) in schedule"
-          :key="key">
-          <td class="text-center bg-red-2">{{ c.mon }}</td>
-          <td class="text-center bg-purple-2">{{ c.tue }}</td>
-          <td class="text-center bg-blue-2">{{ c.wed }}</td>
-          <td class="text-center bg-yellow-2">{{ c.thu }}</td>
-          <td class="text-center bg-green-2">{{ c.fri }}</td>
-          <td class="text-center bg-orange-2">{{ c.sat }}</td>
-          <td class="text-center bg-brown-2">{{ c.sun }}</td>
-        </tr>
+          :key="key"
+          :schedule="c"
+          :id="key"></row>
       </tbody>
     </q-markup-table>
   </q-page>
@@ -38,6 +32,9 @@ export default {
     arraySchedule() {
       return Object.values(this.schedule)
     }
+  },
+  components: {
+    'row' : require('components/row.vue').default
   }
 }
 </script>
