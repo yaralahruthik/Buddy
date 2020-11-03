@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
-    <q-markup-table>
+    <q-markup-table
+      v-if="Object.keys(schedule).length">
       <thead>
         <tr>
           <th class="text-center bg-red-5">Monday</th>
@@ -10,6 +11,7 @@
           <th class="text-center bg-green-5">Friday</th>
           <th class="text-center bg-orange-5">Saturday</th>
           <th class="text-center bg-brown-5">Sunday</th>
+          <th class="text-center bg-grey">Options</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +22,20 @@
           :id="key"></row>
       </tbody>
     </q-markup-table>
+    <div class="absolute-bottom text-center q-mb-lg">
+      <q-btn
+        @click="showAddSchedule = true"
+        round
+        color="primary"
+        size="24px"
+        icon="add"
+      />
+    </div>
+
+    <q-dialog v-model="showAddSchedule">
+      <add-schedule @close="showAddSchedule = false"></add-schedule>
+    </q-dialog>
+
   </q-page>
 </template>
 
@@ -27,6 +43,11 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  data() {
+    return {
+      showAddSchedule: true
+    }
+  },
   computed: {
     ...mapGetters('schedule', ['schedule']),
     arraySchedule() {
@@ -34,7 +55,8 @@ export default {
     }
   },
   components: {
-    'row' : require('components/row.vue').default
+    'row' : require('components/row.vue').default,
+    'add-schedule' : require('components/Modals/AddSchedule.vue').default
   }
 }
 </script>
