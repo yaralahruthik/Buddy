@@ -5,6 +5,15 @@
         <q-toolbar-title class="absolute-center">
           Buddy
         </q-toolbar-title>
+
+        <q-btn
+          to="/auth"
+          flat
+          label="Login"
+          icon-right="account_circle"
+          class="absolute-right"
+          />
+
       </q-toolbar>
     </q-header>
 
