@@ -5,7 +5,7 @@
         <template v-slot:avatar>
           <q-icon name="account_circle" color="primary" />
         </template>
-        Register to access your Buddy everywhere!
+        {{ tab | titleCase }} to access your Buddy everywhere!
       </q-banner>
     </div>
     <div class="row q-mb-md">
@@ -14,7 +14,8 @@
         lazy-rules 
         outlined 
         class="col"
-        v-model="formData.email" 
+        v-model="formData.email"
+        ref="email" 
         label="Email" 
         stack-label />
     </div>
@@ -24,7 +25,8 @@
         lazy-rules
         outlined 
         class="col"
-        v-model="formData.password" 
+        v-model="formData.password"
+        ref="password" 
         label="Password"
         type="password" 
         stack-label />
@@ -34,14 +36,17 @@
       <q-btn 
         type="submit"
         color="primary"
-        label="Register"/>
+        :label="tab"/>
     </div>
   </q-form>
 
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
+  props: ['tab'],
   data() {
     return {
       formData: {
@@ -51,12 +56,27 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['registerUser', 'loginUser']),
     submitForm() {
-      console.log('Submit')
+      this.$refs.email.validate()
+      this.$refs.password.validate()
+      if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
+        if (this.tab == 'login') {
+          this.loginUser(this.formData)
+        }
+        else {
+          this.registerUser(this.formData)
+        }
+      }
     },
     isValidEmailAddress(email) {
       const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       return re.test(String(email).toLowerCase())
+    }
+  },
+  filters: {
+    titleCase(value) {
+      return value.charAt(0).toUpperCase() + value.slice(1)
     }
   }
 }

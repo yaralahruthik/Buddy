@@ -7,9 +7,19 @@
         </q-toolbar-title>
 
         <q-btn
+          v-if="!loggedIn"
           to="/auth"
           flat
           label="Login"
+          icon-right="account_circle"
+          class="absolute-right"
+          />
+
+        <q-btn
+          v-else
+          @click="logoutUser"
+          flat
+          label="Logout"
           icon-right="account_circle"
           class="absolute-right"
           />
@@ -60,6 +70,8 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   data () {
     return {
@@ -77,6 +89,12 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapState('auth', ['loggedIn'])
+  },
+  methods: {
+    ...mapActions('auth', ['logoutUser'])
   }
 }
 </script> 
