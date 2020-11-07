@@ -1,4 +1,4 @@
-# Calendar (buddy)
+# Buddy
 
 A Quasar Framework app
 
