@@ -31,8 +31,9 @@ const state = {
     //   sat: "SatC",
     //   sun: "SunC"
     // }
-  }
-};
+  },
+  scheduleDownloaded: false
+}
 
 const mutations = {
   updateSchedule(state, payload) {
@@ -43,6 +44,12 @@ const mutations = {
   },
   addSchedule(state, payload) {
     Vue.set(state.schedule, payload.id, payload.scheduleRow)
+  },
+  clearSchedule(state) {
+    state.schedule = {}
+  },
+  setScheduleDownloaded(state, value) {
+    state.scheduleDownloaded = value
   }
 }
 
@@ -64,6 +71,11 @@ const actions = {
   fbReadData({ commit }) {
     let userId = firebaseAuth.currentUser.uid
     let userSchedule = firebaseDb.ref("schedule/" + userId)
+
+    // initial check for data
+    userSchedule.once('value', snapshot => {
+      commit('setScheduleDownloaded', true)
+    })
     
     // child added
     userSchedule.on('child_added', snapshot => {
@@ -110,7 +122,7 @@ const actions = {
 
 const getters = {
     schedule: (state) => {
-        return state.schedule
+      return state.schedule
     }
 }
 

@@ -46,6 +46,8 @@ const actions = {
         dispatch('schedule/fbReadData', null, { root: true })
       }
       else {
+        commit('schedule/clearSchedule', null, { root: true })
+        commit('schedule/setScheduleDownloaded', false, { root: true })
         commit("setLoggedIn", false)
         LocalStorage.set("loggedIn", false)
         this.$router.replace("/auth").catch(err => {})
