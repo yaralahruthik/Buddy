@@ -1,6 +1,7 @@
-import { uid } from 'quasar'
+import { uid, Notify } from 'quasar'
 import Vue from 'vue'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
+import { showErrorMessage } from 'src/functions/function-show-error-message'
 
 const state = {
   schedule: {
@@ -75,6 +76,9 @@ const actions = {
     // initial check for data
     userSchedule.once('value', snapshot => {
       commit('setScheduleDownloaded', true)
+    }, error => {
+      showErrorMessage(error.message)
+      this.$router.replace('/auth')
     })
     
     // child added
@@ -106,17 +110,36 @@ const actions = {
   fbAddSchedule({}, payload) {
     let userId = firebaseAuth.currentUser.uid;
     let scheduleRef = firebaseDb.ref('schedule/' + userId + '/' + payload.id)
-    scheduleRef.set(payload.scheduleRow)
+    scheduleRef.set(payload.scheduleRow, error => {
+      if(error) {
+        showErrorMessage(error.message)
+      }
+      else {
+        Notify.create('Schedule Added!')
+      }
+    })
   },
   fbUpdateSchedule({}, payload) {
     let userId = firebaseAuth.currentUser.uid;
     let scheduleRef = firebaseDb.ref('schedule/' + userId + '/' + payload.id)
-    scheduleRef.update(payload.updates)
+    scheduleRef.update(payload.updates, error => {
+      if (error) {
+        showErrorMessage(error.message);
+      } else {
+        Notify.create("Schedule Updated!")
+      }
+    })
   },
   fbDeleteSchedule({}, scheduleRowId) {
     let userId = firebaseAuth.currentUser.uid;
     let scheduleRef = firebaseDb.ref('schedule/' + userId + '/' + scheduleRowId)
-    scheduleRef.remove()
+    scheduleRef.remove(error => {
+      if (error) {
+        showErrorMessage(error.message);
+      } else {
+        Notify.create("Schedule Deleted!")
+      }
+    })
   }
 }
 
