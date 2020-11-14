@@ -83,11 +83,14 @@ export default {
           to: '/'
         },
         {
+<<<<<<< HEAD
           label: 'Todo',
           icon: 'list',
           to: '/todo'
         },
         {
+=======
+>>>>>>> 065a8dd948752105642beed93807e9fc1316e891
           label: 'Settings',
           icon: 'settings',
           to: '/settings'

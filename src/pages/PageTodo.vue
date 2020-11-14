@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <q-page class="q-pa-md">
     <q-list 
       separator
@@ -10,10 +11,15 @@
       :key="key"
       :task="task"
       :id="key" ></task>
+=======
+  <q-page>
+
+>>>>>>> 065a8dd948752105642beed93807e9fc1316e891
   </q-page>
 </template>
 
 <script>
+<<<<<<< HEAD
 import Task from 'src/components/Tasks/Task.vue'
   import { mapGetters } from 'vuex'
 
@@ -31,3 +37,7 @@ import Task from 'src/components/Tasks/Task.vue'
 <style lang="scss">
 
 </style>
+=======
+
+</script>
+>>>>>>> 065a8dd948752105642beed93807e9fc1316e891
