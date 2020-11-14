@@ -1,0 +1,33 @@
+<template>
+  <q-page class="q-pa-md">
+    <q-list 
+      separator
+      bordered>
+    </q-list>
+
+    <task
+      v-for="(task, key) in tasks"
+      :key="key"
+      :task="task"
+      :id="key" ></task>
+  </q-page>
+</template>
+
+<script>
+import Task from 'src/components/Tasks/Task.vue'
+  import { mapGetters } from 'vuex'
+
+  export default {
+    computed: {
+      ...mapGetters('tasks', ['tasks'])
+    },
+    components: {
+      'task': require('components/Tasks/Task.vue').default
+    }
+  }
+
+</script>
+
+<style lang="scss">
+
+</style>
