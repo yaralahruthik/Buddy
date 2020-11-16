@@ -9,7 +9,7 @@
       <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">Oops, no results found!</p>
 
       <q-scroll-area class="relative-position q-scroll-area-tasks">
-        <no-tasks v-if="!Object.keys(tasksTodo).length && !search"></no-tasks>
+        <no-tasks v-if="!Object.keys(tasksTodo).length && !search && !settings.showTasksInOneList"></no-tasks>
 
         <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo" />
 
@@ -47,6 +47,7 @@
     },
     computed: {
       ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted']),
+      ...mapGetters('settings', ['settings']),
       ...mapState('tasks', ['search'])
     },
     components: {
