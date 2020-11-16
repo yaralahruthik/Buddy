@@ -4,6 +4,7 @@
       outlined
       :rules="[val => !!val || 'Field is required']"
       autofocus
+      v-select-all
       clearable
       ref="name"
       :value="name"
@@ -16,8 +17,13 @@
 </template>
 
 <script>
+import { selectAll } from 'src/directives/directive-select-all'
+
 export default {
-  props: ['name']
+  props: ['name'],
+  directives: {
+    selectAll
+  }
 }
 </script>
 

@@ -2,6 +2,7 @@
   <q-item 
     @click="updateTask({ id: id, updates: { completed: !task.completed } })"
     :class="!task.completed ? 'bg-red-1' : 'bg-green-1'"
+    v-touch-hold:1000.mouse="showEditTaskModal"
     clickable
     v-ripple>
     <q-item-section side top>
@@ -12,8 +13,8 @@
 
     <q-item-section>
       <q-item-label
-        :class="{ 'text-strike' : task.completed }">
-        {{ task.name }}
+        :class="{ 'text-strike' : task.completed }"
+        v-html="$options.filters.searchHighlight(task.name, search)">
       </q-item-label>
     </q-item-section>
 
@@ -31,7 +32,7 @@
           <q-item-label 
             class="row justify-end"
             caption>
-            {{ task.dueDate }}
+            {{ task.dueDate | niceDate }}
           </q-item-label>
           <q-item-label 
             class="row justify-end"
@@ -45,7 +46,7 @@
     <q-item-section side>
       <div class="row">
         <q-btn
-          @click.stop="showEditTask = true"
+          @click.stop="showEditTaskModal"
           dense
           flat
           round
@@ -70,7 +71,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+import { date } from 'quasar'
+const { formatDate } = date
 
 export default {
   data() {
@@ -78,9 +81,15 @@ export default {
       showEditTask: false
     }
   },
+  computed: {
+    ...mapState('tasks', ['search'])
+  },
   props: ['task', 'id'],
   methods: {
     ...mapActions('tasks', ['updateTask', 'deleteTask']),
+    showEditTaskModal() {
+      this.showEditTask = true  
+    },
     promptToDelete(id) {
       this.$q.dialog({
         title: 'Confirm',
@@ -95,6 +104,20 @@ export default {
       }).onOk(() => {
         this.deleteTask(id)
       })
+    }
+  },
+  filters: {
+    niceDate(value) {
+      return formatDate(value, 'D MMM')
+    },
+    searchHighlight(value, search) {
+      if (search) {
+        let searchRegExp = new RegExp(search, 'ig')
+        return value.replace(searchRegExp, (match) => {
+          return '<span class="bg-yellow-6">' + match + '</span>'
+        })
+      }
+      return value
     }
   },
   components: {

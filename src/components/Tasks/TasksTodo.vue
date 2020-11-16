@@ -1,19 +1,24 @@
 <template>
-  <div>
-    <list-header bgColor="bg-red-4" >Feeling Lazy, Human?</list-header>
-    
-    <q-list 
-      separator
-      bordered>
+  <transition
+    appear
+    enter-active-class="animated zoomIn"
+    leave-active-class="animated zoomOut absolute-top">
+    <div>
+      <list-header bgColor="bg-red-4" >Feeling Lazy, Human?</list-header>
+      
+      <q-list 
+        separator
+        bordered>
 
-    <task
-      v-for="(task, key) in tasksTodo"
-      :key="key"
-      :task="task"
-      :id="key" ></task>
+      <task
+        v-for="(task, key) in tasksTodo"
+        :key="key"
+        :task="task"
+        :id="key" ></task>
 
-    </q-list>
-  </div>
+      </q-list>
+    </div>
+  </transition>
 </template>
 
 <script>
