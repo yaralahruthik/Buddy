@@ -44,6 +44,7 @@ const actions = {
         LocalStorage.set('loggedIn', true)
         this.$router.push("/").catch(err => {})
         dispatch('schedule/fbReadData', null, { root: true })
+        dispatch('tasks/fbReadData', null, { root: true })
       }
       else {
         commit('schedule/clearSchedule', null, { root: true })
