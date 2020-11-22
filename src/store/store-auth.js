@@ -48,6 +48,7 @@ const actions = {
       }
       else {
         commit('schedule/clearSchedule', null, { root: true })
+        commit('tasks/clearTasks', null, { root: true })
         commit('schedule/setScheduleDownloaded', false, { root: true })
         commit("setLoggedIn", false)
         LocalStorage.set("loggedIn", false)
