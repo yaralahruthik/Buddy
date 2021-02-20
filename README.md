@@ -1,6 +1,8 @@
 # Buddy
 
-A Quasar Framework app
+A Quasar Framework app.
+
+Quasar attempt to make an organizer for students.
 
 
 ## Demo at
