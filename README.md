@@ -2,6 +2,13 @@
 
 A Quasar Framework app
 
+
+## Demo at
+(https://yaralahruthik.github.io/Buddy/)
+
+Username: test@test.com
+Password: 123456
+
 ## Install the dependencies
 ```bash
 npm install
